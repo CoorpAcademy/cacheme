@@ -1,4 +1,8 @@
 # Nodejs Http Cache Helper
+
+[![Coverage Status](https://coveralls.io/repos/CoorpAcademy/cacheme/badge.svg?branch=master)](https://coveralls.io/r/CoorpAcademy/cacheme?branch=master)
+[![Build Status](https://travis-ci.org/CoorpAcademy/cacheme.svg?branch=master)](https://travis-ci.org/CoorpAcademy/cacheme)
+
 A simple but robust Http cache helper
 
 
