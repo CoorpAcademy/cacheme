@@ -55,6 +55,28 @@ describe('CacheMe', function() {
         expect(cm.check(req)).to.equal('cacheOption');
     });
 
+    it('should not find strategy', function() {
+        cm = new CacheMe({
+            'main.strategy': {
+                priority: 1, // greater is better
+                rules:  [
+                    {
+                        method: 'get',
+                        path: '^/$',
+                        cache: 'cacheOption'
+
+                    }
+                ]
+            }
+        });
+
+        req = {
+            originalUrl: '/test',
+            method: 'get'
+        };
+        expect(cm.check(req)).to.equal(false);
+    });
+
     it('should return priority strategy defined before', function() {
         cm = new CacheMe({
             'main.strategy': {
@@ -239,6 +261,42 @@ describe('CacheMe', function() {
         var middleware = cacheMeMiddleWare(options);
         middleware(req, res, function() {
             expect(settedHeader).to.equal('Cache-Control:override');
+            done();
+        });
+    });
+
+    it('should not set header on middleware', function(done) {
+        var settedHeader = 'nevercalled';
+        var res = {
+            header: function(key, value) {
+                settedHeader = key + ':' + value;
+            }
+        };
+
+        var options = {
+            'main.strategy': {
+                priority: 1, // greater is better
+                rules:  [
+                    {
+                        method: '*',
+                        path: '^/$',
+                        cache: {
+                            override: 'override'
+                        }
+
+                    }
+                ]
+            }
+        };
+
+        req = {
+            originalUrl: '/test',
+            method: 'get'
+        };
+
+        var middleware = cacheMeMiddleWare(options);
+        middleware(req, res, function() {
+            expect(settedHeader).to.equal('nevercalled');
             done();
         });
     });

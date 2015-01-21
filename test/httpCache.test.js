@@ -1,6 +1,7 @@
 'use strict';
 var expect      = require('chai').expect;
-var HTTPCache   = require('../lib/httpCache').HTTPCache;
+var httpCacheMiddleware = require('../lib/httpCache');
+var HTTPCache   = httpCacheMiddleware.HTTPCache;
 
 /******
 
@@ -140,6 +141,20 @@ describe('httpCache', function() {
             }
         };
         var middleware = hc.middleware();
+        middleware({}, res, function() {
+            expect(settedHeader).to.equal('Cache-Control:public, max-age=1');
+            done();
+        });
+    });
+
+    it('should set header on default middleware', function(done) {
+        var settedHeader;
+        var res = {
+            header: function(key, value) {
+                settedHeader = key + ':' + value;
+            }
+        };
+        var middleware = httpCacheMiddleware();
         middleware({}, res, function() {
             expect(settedHeader).to.equal('Cache-Control:public, max-age=1');
             done();
