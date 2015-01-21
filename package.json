@@ -1,6 +1,6 @@
 {
   "name": "cacheme",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Unobtrusively handles http cache based route and params",
   "keywords": [
     "express",
@@ -35,7 +35,7 @@
   "devDependencies": {
     "chai": "1.x.x",
     "chai-connect-middleware": "0.3.x",
-    "coveralls": "~2.11.2",
+    "coveralls": "2.11.2",
     "mocha": "1.x.x"
   }
 }

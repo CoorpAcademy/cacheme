@@ -52,11 +52,14 @@ HttpCache can alos be use directly if you don't need to define strategy based on
 
 ## Changelog
 
+### 0.0.2
+- fix issue on exposing middleware 
 ### 0.0.1 
 - first commit
 
 ## Roadmap
-- Add Expires header
+- Add Expires headerpostMessage
+
 
 
 ## Credits
