@@ -10,7 +10,6 @@ env:
         - COVERALLS_SERVICE_NAME="travis-ci"
 before_install:
   - "npm install istanbul -g"
-  - "npm install coveralls -g"
 
 after_success:
-  - "cat reports/coverage/lcov.info | coveralls"
+  - "cat reports/coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
