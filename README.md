@@ -23,7 +23,7 @@ You can simply use CacheMe as a classic middleware
         "priority": 1, // lower is more important
         "rules":  [
             {
-                "method": "get, post, put, del",
+                "method": "get, post, put, del, case insensitive",
                 "path":"regex",
                 "cache": {
                     override: 'public, smax-age: 40',
@@ -51,6 +51,9 @@ HttpCache can alos be use directly if you don't need to define strategy based on
 
 
 ## Changelog
+
+### 0.0.3
+- fix issue with case on method 
 
 ### 0.0.2
 - fix issue on exposing middleware 
