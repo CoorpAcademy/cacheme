@@ -1,0 +1,16 @@
+language: "node_js"
+node_js:
+  - "0.10"
+  - "0.8"
+#  - "0.6"
+
+env:
+    global:
+        - secure: "Ag1pR/hNpoBrjnjUWLbjlBHpxOBcqf4YhAz8j6Ds6CQHk+ZQIMK+YjQa+j9Ogqiy8+cVNQuIey60+cowHoYuDoay7AjsS+dVSjb0vzmMkVhXSF+b+vyc43/5V7Lixapb7GjH0j8HF8IqSuJS9CzQEAVI8KpKfwjx9HkEC1tTpXg="
+        - COVERALLS_SERVICE_NAME="travis-ci"
+before_install:
+  - "npm install istanbul -g"
+  - "npm install coveralls -g"
+
+after_success:
+  - "cat reports/coverage/lcov.info | coveralls"

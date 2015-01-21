@@ -1,0 +1,16 @@
+# build/reports
+build/
+reports/
+
+# Node.js
+node_modules/
+npm-debug.log
+
+# Mac OS X
+.DS_Store
+
+# IDE
+.idea
+
+# Documentation
+docs/_build
