@@ -55,6 +55,9 @@ HttpCache can alos be use directly if you don't need to define strategy based on
 ### 0.0.1 
 - first commit
 
+## Roadmap
+- Add Expires header
+
 
 ## Credits
 
