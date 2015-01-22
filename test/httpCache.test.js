@@ -19,6 +19,9 @@ var res = {
     },
     resetHeader: function() {
         settedHeader = {};
+    },
+    end: function() {
+        // fake method to allow testing
     }
 };
 
@@ -177,7 +180,7 @@ describe('httpCache', function() {
         res.header('Etag', '1234');
         res.header('Last-Modified', '5678');
         hc.removeRevalidate(res);
-
+        res.end();
         expect(res.header('Etag')).to.equal(undefined);
         expect(res.header('Last-Modified')).to.equal(undefined);
     });
@@ -187,6 +190,7 @@ describe('httpCache', function() {
         res.header('Last-Modified', '5678');
         var middleware = httpCacheMiddleware({noRevalidate: true});
         middleware({}, res, function() {
+            res.end();
             expect(res.header('Etag')).to.equal(undefined);
             expect(res.header('Last-Modified')).to.equal(undefined);
             expect(res.header('Cache-Control')).to.equal('public, max-age=1');

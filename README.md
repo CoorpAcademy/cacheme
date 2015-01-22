@@ -52,6 +52,9 @@ HttpCache can alos be use directly if you don't need to define strategy based on
 
 
 ## Changelog
+### 0.0.5
+- fix issue about middleware step, now revalidate header are only remove in last step on response.end
+
 ### 0.0.4
 - add support of removing revalidate header (Etag, Last-Modified)
 
