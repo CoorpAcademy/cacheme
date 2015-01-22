@@ -3,6 +3,25 @@ var expect      = require('chai').expect;
 var httpCacheMiddleware = require('../lib/httpCache');
 var HTTPCache   = httpCacheMiddleware.HTTPCache;
 
+var settedHeader = {};
+var res = {
+    header: function(key, value) {
+        if (value === undefined) {
+            return settedHeader[key];
+        }
+        settedHeader[key] = value;
+    },
+    setHeader: function(key, value) {
+        settedHeader[key] = value;
+    },
+    removeHeader: function(key) {
+        delete settedHeader[key];
+    },
+    resetHeader: function() {
+        settedHeader = {};
+    }
+};
+
 /******
 
 {
@@ -16,6 +35,10 @@ var HTTPCache   = httpCacheMiddleware.HTTPCache;
 
 describe('httpCache', function() {
     var hc;
+
+    beforeEach(function() {
+        res.resetHeader();
+    });
 
     it('should be overrided at constructor level', function() {
         hc = new HTTPCache({
@@ -134,29 +157,39 @@ describe('httpCache', function() {
 
     it('should set header on middleware', function(done) {
         hc = new HTTPCache();
-        var settedHeader;
-        var res = {
-            header: function(key, value) {
-                settedHeader = key + ':' + value;
-            }
-        };
         var middleware = hc.middleware();
         middleware({}, res, function() {
-            expect(settedHeader).to.equal('Cache-Control:public, max-age=1');
+            expect(res.header('Cache-Control')).to.equal('public, max-age=1');
             done();
         });
     });
 
     it('should set header on default middleware', function(done) {
-        var settedHeader;
-        var res = {
-            header: function(key, value) {
-                settedHeader = key + ':' + value;
-            }
-        };
         var middleware = httpCacheMiddleware();
         middleware({}, res, function() {
-            expect(settedHeader).to.equal('Cache-Control:public, max-age=1');
+            expect(res.header('Cache-Control')).to.equal('public, max-age=1');
+            done();
+        });
+    });
+
+    it('should remove header on removeRevalidate', function() {
+        hc = new HTTPCache();
+        res.header('Etag', '1234');
+        res.header('Last-Modified', '5678');
+        hc.removeRevalidate(res);
+
+        expect(res.header('Etag')).to.equal(undefined);
+        expect(res.header('Last-Modified')).to.equal(undefined);
+    });
+
+    it('should no revalidate header on default middleware', function(done) {
+        res.header('Etag', '1234');
+        res.header('Last-Modified', '5678');
+        var middleware = httpCacheMiddleware({noRevalidate: true});
+        middleware({}, res, function() {
+            expect(res.header('Etag')).to.equal(undefined);
+            expect(res.header('Last-Modified')).to.equal(undefined);
+            expect(res.header('Cache-Control')).to.equal('public, max-age=1');
             done();
         });
     });

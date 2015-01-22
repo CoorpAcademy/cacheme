@@ -234,6 +234,9 @@ describe('CacheMe', function() {
         var res = {
             header: function(key, value) {
                 settedHeader = key + ':' + value;
+            },
+            setHeader: function(key, value) {
+                settedHeader = key + ':' + value;
             }
         };
 
@@ -269,6 +272,9 @@ describe('CacheMe', function() {
         var settedHeader = 'nevercalled';
         var res = {
             header: function(key, value) {
+                settedHeader = key + ':' + value;
+            },
+            setHeader: function(key, value) {
                 settedHeader = key + ':' + value;
             }
         };

@@ -1,6 +1,6 @@
 {
   "name": "cacheme",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Unobtrusively handles http cache based route and params",
   "keywords": [
     "express",

@@ -45,12 +45,15 @@ HttpCache can alos be use directly if you don't need to define strategy based on
 	override: 'public, smax-age: 40',
 	proxy: 'public',
 	unit: 'second, minute, hour, month, year',
-	duration: 60
+	duration: 60,
+    noRevalidate: true || false // this will erase Etag or Last-Modified hedader avoinding 304, default is false
 }
 ```
 
 
 ## Changelog
+### 0.0.4
+- add support of removing revalidate header (Etag, Last-Modified)
 
 ### 0.0.3
 - fix issue with case on method 
