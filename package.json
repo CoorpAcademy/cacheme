@@ -29,13 +29,13 @@
   },
   "homepage": "https://github.com/CoorpAcademy/cacheme",
   "dependencies": {
-    "debug": "~2.1.1",
-    "lodash": "~2.4.1"
+    "debug": "~2.3.0",
+    "lodash": "~4.16.6"
   },
   "devDependencies": {
-    "chai": "1.x.x",
+    "chai": "^3.5.0",
     "chai-connect-middleware": "0.3.x",
-    "coveralls": "2.11.2",
-    "mocha": "1.x.x"
+    "coveralls": "2.11.14",
+    "mocha": "^3.1.2"
   }
 }
