@@ -3,7 +3,7 @@ sudo: false
 node_js:
   - "0.10"
   - "0.8"
-#  - "0.6"
+  - "8.30"
 
 env:
     global:
